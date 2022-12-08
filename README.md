@@ -3,6 +3,8 @@ This project scrapes messages from a discord server based on channels.
 
 ### Installation
 - clone repo
+- create venv (recommended, not needed)
+- activate venv
 - create `constants.py` file. It should contain these values:
 ```
 url = "https://discord.com/api/v9/channels/{channel_id}/messages"
@@ -18,3 +20,6 @@ channel_id_dict = {
 
 channel_names = ['<channel_name>']
 ```
+
+### Run
+- Run using `python main.py`
