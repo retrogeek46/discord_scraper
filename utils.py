@@ -88,6 +88,7 @@ def get_channel_messages_before_message_id(channel_id, message_id):
 def get_messages_till_date(date):
     all_messages = []
     for channel in channel_names:
+        # TODO: fix this hack for messageID and messageDate
         message_id = '1049672210811461693'
         message_date = '2022-12-06'
         while compare_dates(message_date, date):

@@ -2,7 +2,11 @@ from utils import get_all_channel_data, get_messages_by_user, \
     get_messages_till_date, load_data, format_data, compare_dates
 import pprint as pp
 
-# load data
+# load data (if fetching from api)
+# date = '2022-01-01'
+# get_messages_till_date(date)
+
+# load data (if data has been saved already, reading from disk instead of api)
 data = load_data('discord_messages_till_2021-12-31')
 
 all_data = {}
@@ -29,7 +33,6 @@ for chunk in data:
             all_data[channel] = [messages]
     else:
         continue
-
 
 
 for channel in all_data:
