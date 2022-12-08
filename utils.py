@@ -7,6 +7,15 @@ from datetime import datetime
 
 unformatted_messages = []
 def get_channel_messages(channel_id):
+    """This method gets last 100 messages
+    from channel with given channel ID
+
+    Args:
+        channel_id (str): channel ID
+
+    Returns:
+        dict:  message data in discord format
+    """
     headers = {
         'authorization' : auth_token
     }
@@ -19,6 +28,15 @@ def get_channel_messages(channel_id):
 
 
 def format_data(data):
+    """This method formats discord format data 
+    into a more compact format
+
+    Args:
+        data (dict): message data in discord format
+
+    Returns:
+        dict: message data in our format
+    """
     messages = []
     for message in data:
         temp = {
@@ -34,6 +52,15 @@ def format_data(data):
 
 
 def format_reactions(reactions):
+    """This method formats reactions dict from discord
+    into a more compact format
+
+    Args:
+        reactions (dict): reactions data in discord format
+
+    Returns:
+        dict: reactions data in our format
+    """
     formatted_reactions = []
     for react in reactions:
         temp = {
@@ -47,6 +74,16 @@ def format_reactions(reactions):
 
 
 def get_messages_by_user(all_data, author):
+    """This methods gets messages from a particular
+    user based on username.
+
+    Args:
+        all_data (dict): messages data in our format
+        author (str): discord username
+
+    Returns:
+        dict: messages by given user
+    """
     user_messages = []
     for channel in all_data:
         for message in all_data[channel]:
@@ -56,6 +93,12 @@ def get_messages_by_user(all_data, author):
 
 
 def get_all_channel_data():
+    """This method gets recent 100 messages for 
+    channels defined in constants.py
+
+    Returns:
+        dict: messages from all defined channels
+    """
     all_data = {
         'memes': [],
         'general': [],
@@ -71,6 +114,16 @@ def get_all_channel_data():
 
 
 def get_channel_messages_before_message_id(channel_id, message_id):
+    """This method fetches 100 messages for given channel
+    before given message
+
+    Args:
+        channel_id (str): channel ID
+        message_id (str): message ID
+
+    Returns:
+        dict: messages in discord format
+    """
     headers = {
         'authorization': auth_token
     }
@@ -86,6 +139,12 @@ def get_channel_messages_before_message_id(channel_id, message_id):
 
 
 def get_messages_till_date(date):
+    """This method fetches messages for all defined channels
+    till give date and saves it to disk
+
+    Args:
+        date (str): date in 'YYYY-MM-DD' format
+    """
     all_messages = []
     for channel in channel_names:
         # TODO: fix this hack for messageID and messageDate
@@ -111,17 +170,41 @@ def get_messages_till_date(date):
     
 
 def save_to_file(data, filename):
+    """This method saves given dict to file with given filename
+
+    Args:
+        data (dict): data to be saved
+        filename (str): name to be given to the file
+    """
     with open(filename, 'w') as file:
         file.write(data)
 
 
 def compare_dates(date_a, date_b):
+    """This method compares two date strings and returns
+    true if first date is greater than second
+
+    Args:
+        date_a (str): first date in 'YYYY-MM-DD' format
+        date_b (_type_): second date in 'YYYY-MM-DD' format
+
+    Returns:
+        bool: whether first date is greater than second date or not
+    """
     formatted_a = datetime.strptime(date_a, '%Y-%m-%d')
     formatted_b = datetime.strptime(date_b, '%Y-%m-%d')
     return formatted_a >= formatted_b
 
 
 def load_data(filename):
+    """This method loads dict from file with given name
+
+    Args:
+        filename (str): given file name
+
+    Returns:
+        dict: data saved in file
+    """
     with open(filename) as file:
         data = json.load(file)
     return data
