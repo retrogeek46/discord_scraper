@@ -177,7 +177,7 @@ def save_to_file(data, filename):
         filename (str): name to be given to the file
     """
     with open(filename, 'w') as file:
-        file.write(data)
+        file.write('files/'+ data)
 
 
 def compare_dates(date_a, date_b):
@@ -205,6 +205,6 @@ def load_data(filename):
     Returns:
         dict: data saved in file
     """
-    with open(filename) as file:
+    with open('files/' + filename) as file:
         data = json.load(file)
     return data
